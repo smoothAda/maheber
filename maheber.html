@@ -20,16 +20,15 @@
             background-size: cover;
             background-attachment: fixed;
         }
-
         .container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: rgba(0, 0, 0, 0.6);
         }
 
         nav {
-            background-color: rgba(52, 152, 219, 0.7);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 10px 0;
         }
 
@@ -48,16 +47,16 @@
         }
 
         nav a:hover {
-            color: #f0f0f0;
+            color: #ffd700;
         }
 
         header {
             text-align: center;
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         }
 
         .points {
@@ -71,6 +70,9 @@
             width: 40px;
             height: 40px;
             margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .pointCont {
@@ -79,8 +81,9 @@
         }
 
         h2 {
-            margin: 10px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 10px ;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        color: #1f1e18;
         }
 
         .score-section {
@@ -88,7 +91,10 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin: 20px;
         }
 
         .tapCount {
@@ -100,6 +106,9 @@
             width: 100px;
             height: 100px;
             transition: transform 0.1s;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
         }
 
         .tapCount img:active {
@@ -144,7 +153,7 @@
         </nav>
         <header>
             <div class="points">
-                <img src="https://via.placeholder.com/40?text=Coin" alt="Coin" class="coin-image">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/coin-pjNsqhbVQD55U1hfjsos2lK4lx8M2m.jpg" alt="Coin" class="coin-image">
                 <h1 class="pointCont">0</h1>
             </div>
             <h2>የቅዱስ ሚካኤል ማህበር</h2>
@@ -153,7 +162,7 @@
         </header>
         <div class="score-section">
             <div class="tapCount">
-                <img src="https://via.placeholder.com/100?text=Coin" alt="Tap to earn points" class="coin-image">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/coin-pjNsqhbVQD55U1hfjsos2lK4lx8M2m.jpg" alt="Tap to earn points" class="coin-image">
             </div>
             <h3>
                 Score: <span class="scoreCont">0</span> / <span class="maxScore">250</span>
