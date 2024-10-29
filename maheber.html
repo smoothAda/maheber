@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>የቅዱስ ሚካኤል ማህበር</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        body {
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/saint-michael-pictures-2560-x-1600-wv9hsqh6049ftwid-4o3VVcm5hA9zQTaf4DTXAPGrjH1PN8.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        nav {
+            background-color: rgba(52, 152, 219, 0.7);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        nav a:hover {
+            color: #f0f0f0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .points {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .coin-image {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .pointCont {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h2 {
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .score-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .tapCount {
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .tapCount img {
+            width: 100px;
+            height: 100px;
+            transition: transform 0.1s;
+        }
+
+        .tapCount img:active {
+            transform: scale(0.95);
+        }
+
+        h3 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .scoreCont {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a href="#home">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tasks">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#users">
+                        <i class="fa fa-users"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#rewards">
+                        <i class="fa fa-trophy"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <div class="points">
+                <img src="https://via.placeholder.com/40?text=Coin" alt="Coin" class="coin-image">
+                <h1 class="pointCont">0</h1>
+            </div>
+            <h2>የቅዱስ ሚካኤል ማህበር</h2>
+            <h2>የማህበር ውይይት</h2>
+            <h2 class="userCont"></h2>
+        </header>
+        <div class="score-section">
+            <div class="tapCount">
+                <img src="https://via.placeholder.com/100?text=Coin" alt="Tap to earn points" class="coin-image">
+            </div>
+            <h3>
+                Score: <span class="scoreCont">0</span> / <span class="maxScore">250</span>
+            </h3>
+        </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let points = 0;
+            let score = 0;
+            const maxScore = 250;
+            const pointCont = document.querySelector('.pointCont');
+            const scoreCont = document.querySelector('.scoreCont');
+            const tapCount = document.querySelector('.tapCount');
+            const userCont = document.querySelector('.userCont');
+
+            // Set initial values
+            pointCont.textContent = points;
+            scoreCont.textContent = score;
+            document.querySelector('.maxScore').textContent = maxScore;
+
+            // Add tap functionality
+            tapCount.addEventListener('click', function() {
+                if (score < maxScore) {
+                    score++;
+                    points += 10;
+                    pointCont.textContent = points;
+                    scoreCont.textContent = score;
+
+                    // Animate the coin
+                    const coin = tapCount.querySelector('img');
+                    coin.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        coin.style.transform = 'scale(1)';
+                    }, 100);
+                }
+            });
+
+            // Set user name if available from Telegram WebApp
+            if (window.Telegram && window.Telegram.WebApp) {
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
+                if (user) {
+                    userCont.textContent = `Welcome, ${user.first_name}!`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
