@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - የቅዱስ ሚካኤል ማህበር</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        body {
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/saint-michael-pictures-2560-x-1600-wv9hsqh6049ftwid-4o3VVcm5hA9zQTaf4DTXAPGrjH1PN8.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h2 {
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #fff;
+        }
+
+        .option:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .option.selected {
+            background-color: rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #45a049;
+        }
+
+        .nav-button:disabled {
+            background-color: rgba(204, 204, 204, 0.5);
+            cursor: not-allowed;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .question {
+                font-size: 16px;
+            }
+
+            .option {
+                padding: 8px;
+            }
+
+            .nav-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="tasks.html">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="users.html">
+                        <i class="fa fa-users"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="rewards.html">
+                        <i class="fa fa-trophy"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h2>የቅዱስ ሚካኤል ማህበር</h2>
+            <h2>የማህበር ውይይት - Quiz</h2>
+        </header>
+        <div class="quiz-container">
+            <div id="quiz-content">
+                <div id="question" class="question"></div>
+                <div id="options" class="options"></div>
+                <div class="navigation">
+                    <button id="prevBtn" class="nav-button" onclick="showPreviousQuestion()">Previous</button>
+                    <button id="nextBtn" class="nav-button" onclick="showNextQuestion()">Next</button>
+                </div>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "What is the capital city of Ethiopia?",
+                options: ["Addis Ababa", "Bahir Dar", "Gondar", "Mekelle"],
+                correctAnswer: 0
+            },
+            {
+                question: "Which Ethiopian emperor is known for his resistance against Italian colonization?",
+                options: ["Haile Selassie", "Menelik II", "Tewodros II", "Zera Yacob"],
+                correctAnswer: 1
+            },
+            {
+                question: "What is the main language spoken in Ethiopia?",
+                options: ["Swahili", "Arabic", "Amharic", "Oromo"],
+                correctAnswer: 2
+            },
+            {
+                question: "Which Ethiopian coffee region is known for its fruity and wine-like flavors?",
+                options: ["Sidamo", "Yirgacheffe", "Harrar", "Limu"],
+                correctAnswer: 2
+            },
+            {
+                question: "What is the name of the Ethiopian calendar?",
+                options: ["Julian calendar", "Gregorian calendar", "Coptic calendar", "Ge'ez calendar"],
+                correctAnswer: 3
+            },
+            {
+                question: "Which Ethiopian dish consists of injera topped with various meats and vegetables?",
+                options: ["Kitfo", "Doro wat", "Tibs", "Beyainatu"],
+                correctAnswer: 3
+            },
+            {
+                question: "What is the name of the ancient Ethiopian kingdom that was centered in Aksum?",
+                options: ["Abyssinia", "Axumite Kingdom", "Solomonic Dynasty", "Zagwe Dynasty"],
+                correctAnswer: 1
+            },
+            {
+                question: "Which Ethiopian river is considered the source of the Blue Nile?",
+                options: ["Awash River", "Omo River", "Tekeze River", "Lake Tana"],
+                correctAnswer: 3
+            },
+            {
+                question: "What is the traditional Ethiopian musical instrument with a lyre-like sound?",
+                options: ["Krar", "Masenqo", "Washint", "Kebero"],
+                correctAnswer: 0
+            },
+            {
+                question: "Which UNESCO World Heritage site in Ethiopia is known for its rock-hewn churches?",
+                options: ["Gondar", "Harar", "Lalibela", "Aksum"],
+                correctAnswer: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        const userAnswers = new Array(quizData.length).fill(null);
+
+        function loadQuestion() {
+            const question = quizData[currentQuestion];
+            document.getElementById('question').textContent = `${currentQuestion + 1}. ${question.question}`;
+            
+            const optionsHtml = question.options.map((option, index) => 
+                `<div class="option ${userAnswers[currentQuestion] === index ? 'selected' : ''}" onclick="selectOption(${index})">${option}</div>`
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = currentQuestion === quizData.length - 1 ? 'Finish' : 'Next';
+        }
+
+        function selectOption(index) {
+            userAnswers[currentQuestion] = index;
+            loadQuestion();
+        }
+
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            const score = userAnswers.reduce((total, answer, index) => 
+                total + (answer === quizData[index].correctAnswer ? 1 : 0), 0);
+            
+            const resultHtml = `
+                <h3>Quiz Completed!</h3>
+                <p>Your score: ${score} out of ${quizData.length}</p>
+                <p>Percentage: ${(score / quizData.length * 100).toFixed(2)}%</p>
+            `;
+            
+            document.getElementById('result').innerHTML = resultHtml;
+            document.getElementById('quiz-content').style.display = 'none';
+            
+            // Save the quiz result to localStorage
+            localStorage.setItem('quizCompleted', 'true');
+            localStorage.setItem('quizScore', score);
+        }
+
+        function checkQuizStatus() {
+            if (localStorage.getItem('quizCompleted') === 'true') {
+                const score = localStorage.getItem('quizScore');
+                document.getElementById('result').innerHTML = `
+                    <h3>You have already taken this exam.</h3>
+                    <p>Your previous score: ${score} out of ${quizData.length}</p>
+                    <p>Percentage: ${(score / quizData.length * 100).toFixed(2)}%</p>
+                `;
+                document.getElementById('quiz-content').style.display = 'none';
+            } else {
+                loadQuestion();
+            }
+        }
+
+        checkQuizStatus();
+    </script>
+</body>
+</html>
