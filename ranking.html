@@ -53,25 +53,22 @@
             color: #ffd700;
         }
 
-        header {
-            text-align: center;
-        padding: 10px 0; 
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         h1 {
-            color: #000;
-            font-family:Arial, Helvetica, sans-serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             text-align: center;
             margin-bottom: 20px;
         }
 
         .ranking-list {
             width: 100%;
-            max-width: 600px;
+            max-width: 900px;
         }
 
         .ranking-card {
@@ -104,30 +101,13 @@
 
         .user-name {
             font-size: 18px;
+            color: #ffd700;
             font-weight: bold;
             margin-bottom: 5px;
         }
 
         .user-points {
-            color: #ffd700;
-        }
-
-        .ranking-list-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .ranking-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .ranking-list li {
-            text-align: center;
-            margin: 5px 0;
+            color: #dddddc;
         }
         
     </style>
@@ -161,56 +141,61 @@
         <header>
             <main>
                 <h1>Ranking</h1>
-                <div class="ranking-list-container">
-                    <ul class="ranking-list">
-                        <li>
-                            <div class="ranking-card">
-                                <div class="rank-badge">1</div>
-                                <div class="user-info">
-                                    <div class="user-name">John Doe</div>
-                                    <div class="user-points">Points: 1000</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ranking-card">
-                                <div class="rank-badge">2</div>
-                                <div class="user-info">
-                                    <div class="user-name">Jane Smith</div>
-                                    <div class="user-points">Points: 950</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ranking-card">
-                                <div class="rank-badge">3</div>
-                                <div class="user-info">
-                                    <div class="user-name">Bob Johnson</div>
-                                    <div class="user-points">Points: 900</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ranking-card">
-                                <div class="rank-badge">4</div>
-                                <div class="user-info">
-                                    <div class="user-name">Alice Brown</div>
-                                    <div class="user-points">Points: 850</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ranking-card">
-                                <div class="rank-badge">5</div>
-                                <div class="user-info">
-                                    <div class="user-name">Charlie Davis</div>
-                                    <div class="user-points">Points: 800</div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div id="ranking-list" class="ranking-list">
+                    <!-- Ranking cards will be dynamically inserted here -->
                 </div>
             </main>
     </div>
+    <script>
+        // Sample data (in a real application, this would come from your backend)
+        const rankingData = [
+            { id: 1, name: "John Doe", points: 1000 },
+            { id: 2, name: "Jane Smith", points: 950 },
+            { id: 3, name: "Bob Johnson", points: 900 },
+            { id: 4, name: "Alice Brown", points: 850 },
+            { id: 5, name: "Charlie Davis", points: 800 }
+        ];
+
+        // Function to create a ranking card
+        function createRankingCard(rank, user) {
+            return `
+                <div class="ranking-card" data-user-id="${user.id}">
+                    <div class="rank-badge">${rank}</div>
+                    <div class="user-info">
+                        <div class="user-name">${user.name}</div>
+                        <div class="user-points">Points: ${user.points}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to populate the ranking list
+        function populateRankingList(data) {
+            const rankingList = document.getElementById('ranking-list');
+            rankingList.innerHTML = data.map((user, index) => 
+                createRankingCard(index + 1, user)
+            ).join('');
+        }
+
+        // Initial population of the ranking list
+        populateRankingList(rankingData);
+
+        // Example of how to update the ranking when new data is received
+        function updateRanking(newData) {
+            populateRankingList(newData);
+        }
+
+        // Simulating a data update after 5 seconds (in a real app, this would be triggered by server events or polling)
+        setTimeout(() => {
+            const updatedData = [
+                { id: 1, name: "John Doe", points: 1050 },
+                { id: 2, name: "Jane Smith", points: 1000 },
+                { id: 3, name: "Bob Johnson", points: 950 },
+                { id: 4, name: "Alice Brown", points: 900 },
+                { id: 5, name: "Charlie Davis", points: 850 }
+            ];
+            updateRanking(updatedData);
+        }, 5000);
+    </script>
 </body>
 </html>
