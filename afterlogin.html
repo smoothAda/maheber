@@ -193,6 +193,56 @@
         .form-button:hover {
             background-color: #45a049;
         }
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            nav a {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .card, .form-container {
+                max-width: 90%;
+            }
+
+            .dropdown {
+                top: 5px;
+                right: 5px;
+            }
+
+            .dropbtn {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            nav a {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .card, .form-container {
+                max-width: 95%;
+            }
+
+            .form-input, .form-button {
+                font-size: 14px;
+            }
+
+            .dropdown-content {
+                min-width: 120px;
+            }
+
+            .dropdown-content a {
+                padding: 10px 12px;
+            }
+        }
     </style>
 </head>
 <body>
