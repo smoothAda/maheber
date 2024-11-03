@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password - የቅዱስ ሚካኤል ማህበር</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="img/coin.ico" type="image/x-icon">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        body {
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/saint-michael-pictures-2560-x-1600-wv9hsqh6049ftwid-4o3VVcm5hA9zQTaf4DTXAPGrjH1PN8.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        h2 {
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            max-width: 380px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .dropbtn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                width: 95%;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .form-container {
+                width: 95%;
+                padding: 10px;
+            }
+            input[type="password"] {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="tasks.html">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="users.html">
+                        <i class="fa fa-users"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="rewards.html">
+                        <i class="fa fa-trophy"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h2>የቅዱስ ሚካኤል ማህበር</h2>
+            <div class="dropdown">
+                <button class="dropbtn">ada ▼</button>
+                <div class="dropdown-content">
+                    <a href="editProfile.html">Edit Profile</a>
+                    <a href="changePassword.html">Change Password</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
+        </header>
+      
+    </div>
+
+    <script>
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var newPassword = 
+ document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match. Please try again.');
+                return;
+            }
+            // Here you would typically send the form data to a server
+            alert('Password changed successfully!');
+            // Redirect to the main page or reload the current page
+            window.location.href = 'index.html';
+        });
+
+        function logout() {
+            // Clear any session data or tokens
+            localStorage.clear();
+            // Redirect to the login page
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
