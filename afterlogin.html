@@ -8,7 +8,7 @@
     <link rel="icon" href="img/coin.ico" type="image/x-icon">
 
     <style>
-        body, html {
+         body, html {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
@@ -84,13 +84,6 @@
             max-width: 400px;
         }
 
-        .user-menu {
-            text-align: right;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
         .dropdown {
             position: absolute;
             top: 10px;
@@ -133,25 +126,57 @@
             display: block;
         }
 
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1;
-            padding: 20px;
+        .start-exam-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .card {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-            padding: 20px;
+        .start-exam-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Form Styles */
+        .form-container {
+            display: none;
             width: 100%;
             max-width: 400px;
         }
 
-        .start-exam-btn {
+        .form-container.active {
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .form-button {
             width: 100%;
             padding: 15px;
             margin-top: 20px;
@@ -165,7 +190,7 @@
             transition: background-color 0.3s;
         }
 
-        .start-exam-btn:hover {
+        .form-button:hover {
             background-color: #45a049;
         }
     </style>
@@ -198,12 +223,93 @@
                 <button href="quize.html" class="start-exam-btn" onclick="startExam()">Start Exam</button>
             </div>
         </div>
+        <!-- Edit Profile Form -->
+        <div class="form-container" id="edit-profile-form">
+            <div class="card">
+                <h2>Edit Profile</h2>
+                <form onsubmit="handleEditProfile(event)">
+                    <div>
+                        <label class="form-label" for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" class="form-input" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="email">Email:</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" class="form-input" required>
+                    </div>
+                    <button type="submit" class="form-button">Save Changes</button>
+                </form>
+            </div>
+        </div>
+<!-- Change Password Form -->
+<div class="form-container" id="change-password-form">
+    <div class="card">
+        <h2>Change Password</h2>
+        <form onsubmit="handleChangePassword(event)">
+            <div>
+                <label class="form-label" for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" class="form-input" required>
+            </div>
+            <div>
+                <label class="form-label" for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" class="form-input" required>
+            </div>
+            <div>
+                <label class="form-label" for="confirmPassword">Confirm New Password:</label>
+                <input type="password" id="confirmPassword" class="form-input" required>
+            </div>
+            <button type="submit" class="form-button">Change Password</button>
+        </form>
+    </div>
+</div>
     </div>
 
     <script>
+               function showEditProfile(event) {
+            event.preventDefault();
+            document.getElementById('default-content').style.display = 'none';
+            document.getElementById('change-password-form').style.display = 'none';
+            document.getElementById('edit-profile-form').style.display = 'block';
+        }
+
+        function showChangePassword(event) {
+            event.preventDefault();
+            document.getElementById('default-content').style.display = 'none';
+            document.getElementById('edit-profile-form').style.display = 'none';
+            document.getElementById('change-password-form').style.display = 'block';
+        }
+
+        function handleEditProfile(event) {
+            event.preventDefault();
+            // Add your profile update logic here
+            alert('Profile updated successfully!');
+        }
+
+        function handleChangePassword(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match!');
+                return;
+            }
+            // Add your password change logic here
+            alert('Password changed successfully!');
+        }
+
         function startExam() {
             window.location.href = 'quize.html';
         }
+
+        function logout() {
+            // Add your logout logic here
+            window.location.href = 'login.html';
+        }
+
     </script>
 </body>
 </html>
