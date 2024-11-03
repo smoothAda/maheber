@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Password - የቅዱስ ሚካኤል ማህበር</title>
+    <title>Reward - የቅዱስ ሚካኤል ማህበር</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" href="img/coin.ico" type="image/x-icon">
-
     <style>
         body, html {
             height: 100%;
@@ -21,217 +19,88 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        nav {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 10px 0;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        nav a:hover {
-            color: #ffd700;
-        }
-
-        header {
+            border-radius: 20px;
+            padding: 40px;
             text-align: center;
-            padding: 20px 0;
-            position: relative;
+            max-width: 600px;
+            width: 90%;
         }
 
-        h2 {
-            color: #fff;
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 10px 0;
+        h1, h2 {
+            margin: 0;
+            padding: 10px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        .winner-container {
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
-            padding: 15px;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .form-group {
-            margin-bottom: 15px;
+        .winner {
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0;
+            filter: blur(10px);
+            transition: opacity 1s ease, filter 1s ease;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="password"] {
-            width: 100%;
-            max-width: 380px;
-            padding: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
+        .reveal-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ffd700;
+            color: #333;
             border: none;
-            border-radius: 4px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        .dropdown {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .dropbtn {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 5px;
+        .reveal-btn:hover {
+            background-color: #ffea00;
         }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        @media (max-width: 600px) {
-            .form-container {
-                width: 95%;
-                padding: 10px;
-            }
-        }
-        @media (max-width: 480px) {
-            .form-container {
-                width: 95%;
-                padding: 10px;
-            }
-            input[type="password"] {
-                max-width: 100%;
-            }
+        .trophy-icon {
+            font-size: 48px;
+            color: #ffd700;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <nav>
-            <ul>
-                <li>
-                    <a href="index.html">
-                        <i class="fa fa-home"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="tasks.html">
-                        <i class="fa fa-tasks"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="users.html">
-                        <i class="fa fa-users"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="rewards.html">
-                        <i class="fa fa-trophy"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <header>
-            <h2>የቅዱስ ሚካኤል ማህበር</h2>
-            <div class="dropdown">
-                <button class="dropbtn">ada ▼</button>
-                <div class="dropdown-content">
-                    <a href="editProfile.html">Edit Profile</a>
-                    <a href="changePassword.html">Change Password</a>
-                    <a href="#" onclick="logout()">Logout</a>
-                </div>
-            </div>
-        </header>
-      
+        <i class="fa fa-trophy trophy-icon" aria-hidden="true"></i>
+        <h1>የቅዱስ ሚካኤል ማህበር</h1>
+        <h2>Reward Winner</h2>
+        <div class="winner-container">
+            <div id="winner" class="winner" aria-live="polite">John Doe</div>
+        </div>
+        <button id="revealBtn" class="reveal-btn">Reveal Winner</button>
     </div>
 
     <script>
-        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var newPassword = 
- document.getElementById('newPassword').value;
-            var confirmPassword = document.getElementById('confirmPassword').value;
-            if (newPassword !== confirmPassword) {
-                alert('New passwords do not match. Please try again.');
-                return;
-            }
-            // Here you would typically send the form data to a server
-            alert('Password changed successfully!');
-            // Redirect to the main page or reload the current page
-            window.location.href = 'index.html';
+        document.getElementById('revealBtn').addEventListener('click', function() {
+            const winner = document.getElementById('winner');
+            winner.style.opacity = '1';
+            winner.style.filter = 'blur(0)';
+            this.style.display = 'none';
         });
-
-        function logout() {
-            // Clear any session data or tokens
-            localStorage.clear();
-            // Redirect to the login page
-            window.location.href = 'login.html';
-        }
     </script>
 </body>
 </html>
